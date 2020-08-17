@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qht.mapper.CommentMapper">
+
+    <select id="list" resultType="com.qht.common.dto.CommentDto">
+        select
+        c.id as "id",
+        c.discuss as "discuss",
+        c.created as "created",
+        u.username as "username",
+        u.avatar as "avater"
+        from
+        m_comment c left join m_blog b on c.blog_id = b.id
+        left join m_user u on b.user_id = u.id
+        where b.id = #{bolgId}
+		order by c.created desc
+    </select>
+</mapper>
